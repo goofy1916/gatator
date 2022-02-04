@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "306215569608",
+    "project_id": "gatator-66e37",
+    "storage_bucket": "gatator-66e37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306215569608:android:bb501045886dfaf97cfdfd",
+        "android_client_info": {
+          "package_name": "com.pushhub.gatator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306215569608-1vrmp0mopb83rtbcfh34ckkvqvhpq44v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo2nF_9R0lAjH-CtmxCmAtx1suAatwbu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306215569608-1vrmp0mopb83rtbcfh34ckkvqvhpq44v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
