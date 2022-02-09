@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gatator/app/controllers/myhome_controller.dart';
-import 'package:gatator/app/data/models/subject_model.dart';
 import 'package:gatator/app/ui/global_widgets/wide_button.dart';
 import 'package:gatator/app/ui/theme/color_constants.dart';
 import 'package:get/get.dart';
@@ -16,19 +15,17 @@ class MyHomePage extends GetView<MyHomeController> {
       child: Scaffold(
         drawer: const Drawer(),
         appBar: AppBar(
-            toolbarHeight: 80,
-            elevation: 4,
-            title: const Text('Gatator'),
-            centerTitle: true,
-            actions: const [
-              CircleAvatar(
-                backgroundColor: kTextColor,
-                child: Icon(Icons.person_rounded, color: kPrimaryColor),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-            ]),
+          title: const Text('Gatator'),
+          actions: const [
+            CircleAvatar(
+              backgroundColor: kTextColor,
+              child: Icon(Icons.person_rounded, color: kPrimaryColor),
+            ),
+            SizedBox(
+              width: 16,
+            ),
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -60,7 +57,7 @@ class MyHomePage extends GetView<MyHomeController> {
               Flexible(
                 flex: 1,
                 child: WideButton(
-                    onPressed: () => controller.toTestCustomizationScreen(),
+                    onPressed: () => controller.toQuizCustomizationScreen(),
                     child: Center(
                       child: Text(
                         "Next",

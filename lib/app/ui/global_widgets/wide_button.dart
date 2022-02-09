@@ -16,7 +16,7 @@ class WideButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: child,
     );
   }

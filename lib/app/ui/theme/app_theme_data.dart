@@ -4,7 +4,12 @@ import 'package:gatator/app/ui/theme/color_constants.dart';
 final ThemeData appThemeData = ThemeData(
   primaryColor: const Color(0xff43566e),
   scaffoldBackgroundColor: const Color(0xff313750),
-  appBarTheme: const AppBarTheme(color: kPrimaryColor),
+  appBarTheme: const AppBarTheme(
+    color: kPrimaryColor,
+    toolbarHeight: 80,
+    elevation: 4,
+    centerTitle: true,
+  ),
   fontFamily: 'Helvetica',
   textTheme: const TextTheme(
     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
