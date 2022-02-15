@@ -16,12 +16,15 @@ class MyHomePage extends GetView<MyHomeController> {
         drawer: const Drawer(),
         appBar: AppBar(
           title: const Text('Gatator'),
-          actions: const [
-            CircleAvatar(
+          actions: [
+            IconButton(
+                onPressed: () => controller.addQuestion(),
+                icon: const Icon(Icons.add_circle_outline)),
+            const CircleAvatar(
               backgroundColor: kTextColor,
               child: Icon(Icons.person_rounded, color: kPrimaryColor),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
           ],

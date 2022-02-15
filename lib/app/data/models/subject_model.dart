@@ -24,15 +24,14 @@ class Subject {
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
         title: json["title"],
         subTopics: List<SubTopic>.from(
-            json["subTopics"].map((x) => SubTopic.fromJson(x))),
+            (json["sub_topics"] ?? []).map((x) => SubTopic.fromJson(x))),
         selected: json["fullSubject"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        "subTopics":
+        "sub_topics":
             List<dynamic>.from((subTopics ?? []).map((x) => x.toJson())),
-        "selected": selected,
       };
 }
 
@@ -52,6 +51,5 @@ class SubTopic {
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        "selected": selected,
       };
 }

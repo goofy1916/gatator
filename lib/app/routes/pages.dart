@@ -1,6 +1,8 @@
+import 'package:gatator/app/bindings/addquestion_binding.dart';
 import 'package:gatator/app/bindings/myhome_binding.dart';
 import 'package:gatator/app/bindings/quizpage_binding.dart';
 import 'package:gatator/app/bindings/quizprefrences_binding.dart';
+import 'package:gatator/app/ui/pages/addquestion_page/addquestion_page.dart';
 import 'package:gatator/app/ui/pages/myhome_page/myhome_page.dart';
 import 'package:gatator/app/ui/pages/quiz_page/quiz_page.dart';
 import 'package:gatator/app/ui/pages/quizpreferences_page/quizpreferences_page.dart';
@@ -21,5 +23,9 @@ abstract class AppPages {
         name: Routes.Quiz,
         page: () => const QuizPage(),
         binding: QuizPageBinding()),
+    GetPage(
+        name: Routes.AddQuestion,
+        page: () => AddQuestionPage(),
+        binding: AddQuestionBinding()),
   ];
 }

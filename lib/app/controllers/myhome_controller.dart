@@ -34,9 +34,6 @@ class MyHomeController extends GetxController {
   }
 
   selectSubject(Subject subject) {
-    // _allSubjects.firstWhere((element) => element == subject).selected =
-    //     !_allSubjects.firstWhere((element) => element == subject).selected;
-
     subject.selected = !subject.selected;
     for (var element in subject.subTopics ?? []) {
       element.selected = subject.selected;
@@ -48,10 +45,10 @@ class MyHomeController extends GetxController {
     subject.subTopics!.firstWhere((element) => element == topic).selected =
         !subject.subTopics!.firstWhere((element) => element == topic).selected;
     if (!subject.selected) {
-      bool subjectSelected = true;
+      bool subjectSelected = false;
       for (var topic in subject.subTopics!) {
-        if (!topic.selected) {
-          subjectSelected = false;
+        if (topic.selected) {
+          subjectSelected = true;
         }
       }
       subject.selected = subjectSelected;
@@ -60,7 +57,10 @@ class MyHomeController extends GetxController {
   }
 
   toQuizCustomizationScreen() {
-    log("Called to navigate to QP");
     Get.toNamed(Routes.QuizPrefrences);
+  }
+
+  addQuestion() {
+    Get.toNamed(Routes.AddQuestion);
   }
 }

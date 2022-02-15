@@ -12,6 +12,8 @@ final ThemeData appThemeData = ThemeData(
   ),
   fontFamily: 'Helvetica',
   textTheme: const TextTheme(
+    bodyText2: TextStyle(
+        fontSize: 18.0, fontWeight: FontWeight.normal, color: Colors.white),
     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
     headline4:
         TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: kTextColor),

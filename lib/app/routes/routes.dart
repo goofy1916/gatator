@@ -8,4 +8,5 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const QuizPrefrences = '/quiz_prefrences';
   static const Quiz = '/take_quiz';
+  static const AddQuestion = '/add_question';
 }

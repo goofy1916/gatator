@@ -11,7 +11,7 @@ class QuizPreferencesPage extends GetView<QuizPreferencesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quiz Prefrences'),
+        title: const Text('Quiz Preferences'),
       ),
       body: SafeArea(
         child: Padding(
@@ -20,98 +20,105 @@ class QuizPreferencesPage extends GetView<QuizPreferencesController> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'No of Questions for quiz :',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: kPrimaryColor),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextButton(
-                                  onPressed: () =>
-                                      controller.updateNoOfQuestions(1),
-                                  child: const Text("+")),
-                              SizedBox(
-                                width: 30,
-                                child: Center(
-                                  child: Text(
-                                    controller.noOfQuestions.value.toString(),
-                                    style: const TextStyle(color: Colors.white),
+                Expanded(
+                  flex: 9,
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'No of Questions for quiz :',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: kPrimaryColor),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextButton(
+                                    onPressed: () =>
+                                        controller.updateNoOfQuestions(-1),
+                                    child: const Text("-")),
+                                SizedBox(
+                                  width: 30,
+                                  child: Center(
+                                    child: Text(
+                                      controller.noOfQuestions.value.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              TextButton(
-                                  onPressed: () =>
-                                      controller.updateNoOfQuestions(-1),
-                                  child: const Text("-")),
-                            ],
+                                TextButton(
+                                    onPressed: () =>
+                                        controller.updateNoOfQuestions(1),
+                                    child: const Text("+")),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Time Wanted :',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: kPrimaryColor),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextButton(
-                                  onPressed: () =>
-                                      controller.updateTimeWanted(0.5),
-                                  child: const Text("+")),
-                              SizedBox(
-                                width: 30,
-                                child: Center(
-                                  child: Text(
-                                    controller.timeInMinutes.value.toString(),
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                  onPressed: () =>
-                                      controller.updateTimeWanted(-0.5),
-                                  child: const Text("-")),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                WideButton(
-                    onPressed: () => controller.takeQuiz(),
-                    child: Center(
-                      child: Text(
-                        "Take Quiz",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: kButtonTextColor),
+                        ],
                       ),
-                    ))
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Time Wanted (in minutes):',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: kPrimaryColor),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextButton(
+                                    onPressed: () =>
+                                        controller.updateTimeWanted(-0.5),
+                                    child: const Text("-")),
+                                SizedBox(
+                                  width: 30,
+                                  child: Center(
+                                    child: Text(
+                                      controller.timeInMinutes.value.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
+                                    onPressed: () =>
+                                        controller.updateTimeWanted(0.5),
+                                    child: const Text("+")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  child: WideButton(
+                      onPressed: () => controller.takeQuiz(),
+                      child: Center(
+                        child: Text(
+                          "Take Quiz",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: kButtonTextColor),
+                        ),
+                      )),
+                )
               ],
             );
           }),

@@ -3,6 +3,7 @@
 //     final question = questionFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:gatator/app/ui/utils/enum.dart';
 
 List<Question> questionFromJson(String str) =>
     List<Question>.from(json.decode(str).map((x) => Question.fromJson(x)));
@@ -19,43 +20,41 @@ class Question {
     required this.answer,
     required this.topic,
     required this.subTopic,
-    this.optionA,
-    this.optionB,
-    this.optionC,
-    this.optionD,
-    this.optionE,
-    this.correctAnswer,
+    this.options,
+    this.correctAnswer = const [],
+    required this.selectedAnswer,
+    this.answered = false,
+    this.isRight = false,
   });
 
-  Type type;
+  QuestionType type;
   String question;
   String? from;
   String? to;
   String answer;
   String topic;
   String subTopic;
-  String? optionA;
-  String? optionB;
-  String? optionC;
-  String? optionD;
-  String? optionE;
-  String? correctAnswer;
+  List<String>? options;
+  List<String>? correctAnswer;
+  List<String> selectedAnswer;
+  bool answered;
+  bool isRight;
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
-        type: typeValues.map[json["type"]]!,
-        question: json["question"],
-        from: json["from"],
-        to: json["to"],
-        answer: json["answer"],
-        topic: json["topic"],
-        subTopic: json["SubTopic"],
-        optionA: json["optionA"],
-        optionB: json["optionB"],
-        optionC: json["optionC"],
-        optionD: json["optionD"],
-        optionE: json["optionE"],
-        correctAnswer: json["correctAnswer"],
-      );
+      type: typeValues.map[json["type"]]!,
+      question: json["question"],
+      from: json["from"],
+      to: json["to"],
+      answer: json["answer"],
+      topic: json["topic"],
+      subTopic: json["subTopic"],
+      options: json["options"] == null
+          ? null
+          : List<String>.from(json["options"].map((x) => x)),
+      correctAnswer: json["correctAnswer"] == null
+          ? null
+          : List<String>.from(json["correctAnswer"].map((x) => x)),
+      selectedAnswer: []);
 
   Map<String, dynamic> toJson() => {
         "type": typeValues.reverse[type],
@@ -64,23 +63,20 @@ class Question {
         "to": to,
         "answer": answer,
         "topic": topic,
-        "SubTopic": subTopic,
-        "optionA": optionA,
-        "optionB": optionB,
-        "optionC": optionC,
-        "optionD": optionD,
-        "optionE": optionE,
+        "subTopic": subTopic,
+        "options": options == null
+            ? null
+            : List<dynamic>.from((options ?? []).map((x) => x)),
         "correctAnswer": correctAnswer,
       };
 }
 
-enum Type { NAT, MCQ }
-
-final typeValues = EnumValues({"mcq": Type.MCQ, "nat": Type.NAT});
+final typeValues =
+    EnumValues({"mcq": QuestionType.MCQ, "nat": QuestionType.NAT});
 
 class EnumValues<T> {
   Map<String, T> map;
-  late Map<T, String>? reverseMap;
+  Map<T, String>? reverseMap;
 
   EnumValues(
     this.map,

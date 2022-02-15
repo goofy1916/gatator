@@ -12,7 +12,7 @@ class WideButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       color: kButtonColor,
-      height: 50,
+      height: kToolbarHeight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

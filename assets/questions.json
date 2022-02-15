@@ -11,15 +11,11 @@
     {
         "type":"mcq",
         "question":"https://www.fillmurray.com/640/360",
-        "optionA":"A",
-        "optionB":"B",
-        "optionC":"C",
-        "optionD":"D",
-        "optionE":"E",
+        "options":["A","B","C","D","E"],
         "answer":"https://www.fillmurray.com/640/360",
         "topic":"Engineering Mathematics",
         "SubTopic":"Matrices",
-        "correctAnswer":"C"
+        "correctAnswer":["C","A"]
     },
     {
         "type":"nat",
@@ -33,15 +29,11 @@
     {
         "type":"mcq",
         "question":"https://www.fillmurray.com/640/360",
-        "optionA":"A",
-        "optionB":"B",
-        "optionC":"C",
-        "optionD":"D",
-        "optionE":"E",
+        "options":["A","B","C","D","E"],
         "answer":"https://www.fillmurray.com/640/360",
         "topic":"Engineering Mathematics",
         "SubTopic":"Matrices",
-        "correctAnswer":"C"
+        "correctAnswer":["C"]
     },
     {
         "type":"nat",
@@ -55,15 +47,11 @@
     {
         "type":"mcq",
         "question":"https://www.fillmurray.com/640/360",
-        "optionA":"A",
-        "optionB":"B",
-        "optionC":"C",
-        "optionD":"D",
-        "optionE":"E",
+        "options":["A","B","C","D","E"],
         "answer":"https://www.fillmurray.com/640/360",
         "topic":"Computer Network",
         "SubTopic":"udp",
-        "correctAnswer":"C"
+        "correctAnswer":["C"]
     },
     {
         "type":"nat",
@@ -77,15 +65,11 @@
     {
         "type":"mcq",
         "question":"https://www.fillmurray.com/640/360",
-        "optionA":"A",
-        "optionB":"B",
-        "optionC":"C",
-        "optionD":"D",
-        "optionE":"E",
+        "options":["A","B","C","D","E"],
         "answer":"https://www.fillmurray.com/640/360",
         "topic":"Engineering Mathematics",
         "SubTopic":"Broze",
-        "correctAnswer":"C"
+        "correctAnswer":["C"]
     },
     {
         "type":"nat",
@@ -99,13 +83,10 @@
     {
         "type":"mcq",
         "question":"https://www.fillmurray.com/640/360",
-        "optionA":"A",
-        "optionB":"B",
-        "optionC":"C",
-        "optionD":"D",
+        "options":["A","B","C","D"],
         "answer":"https://www.fillmurray.com/640/360",
         "topic":"Engineering Mathematics",
         "SubTopic":"Matrices",
-        "correctAnswer":"A"
+        "correctAnswer":["A"]
     }
 ]
