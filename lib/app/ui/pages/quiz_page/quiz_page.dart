@@ -15,7 +15,17 @@ class QuizPage extends GetView<QuizPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quiz'),
+        title: Column(
+          children: [
+            const Text('Quiz'),
+            Obx(() => Text(
+                  controller.submitted.value
+                      ? "Scrore :${controller.correctAnswers}/${controller.questions.length}"
+                      : "",
+                  style: const TextStyle(fontSize: 16),
+                ))
+          ],
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -32,7 +42,7 @@ class QuizPage extends GetView<QuizPageController> {
                         : const Text("Submit"),
                     onPressed: () => controller.submitted.value
                         ? Get.offAndToNamed(Routes.HOME)
-                        : controller.submit(),
+                        : submit(),
                   ),
                 )),
           ),
@@ -47,39 +57,10 @@ class QuizPage extends GetView<QuizPageController> {
           } else {
             return Column(
               children: [
-                // SizedBox(
-                //   height: 40,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       IconButton(
-                //         icon: const Icon(
-                //           Icons.arrow_back_ios_new_sharp,
-                //           color: kAccentColor,
-                //         ),
-                //         onPressed: () => controller.updateStep(-1),
-                //       ),
-                //       IconButton(
-                //         icon: const Icon(
-                //           Icons.arrow_forward_ios_sharp,
-                //           color: kAccentColor,
-                //         ),
-                //         onPressed: () => controller.updateStep(1),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                const SizedBox(
+                  height: 16,
+                ),
                 NumberStepper(
-                  // controlsBuilder: (BuildContext context,
-                  //     {VoidCallback? onStepContinue,
-                  //     VoidCallback? onStepCancel}) {
-                  //   return const SizedBox.shrink();
-                  // },
-                  // onStepTapped: (value) =>
-                  //     controller.updateCurrentQuestion(value),
-                  // steps: getQuestions(),
-                  // currentStep: controller.currentQuestion.value,
-                  // type: StepperType.horizontal,
                   activeStep: controller.currentQuestion.value,
                   onStepReached: (value) =>
                       controller.updateCurrentQuestion(value),
@@ -98,30 +79,28 @@ class QuizPage extends GetView<QuizPageController> {
                   numbers: List.generate(
                       controller.questions.length, (index) => index + 1),
                 ),
-                Expanded(child: getQuestion()),
+                Expanded(
+                    child: QuestionWidget(i: controller.currentQuestion.value)),
               ],
             );
-            // return PageView(
-            //   allowImplicitScrolling: false,
-            //   pageSnapping: true,
-            //   physics: const ClampingScrollPhysics(),
-            //   controller: controller.questionController,
-            //   children: getQuestions(),
-            // );
           }
         }),
       ),
     );
   }
 
-  Widget getQuestion() {
-    // List<Step> widgets = [];
-    // for (int i = 0; i < controller.questions.length; i++) {
-    //   widgets.add(
-    //     Step(title: const Text(""), content: QuestionWidget(i: i)),
-    //   );
-    // }
-
-    return QuestionWidget(i: controller.currentQuestion.value);
+  submit() {
+    Get.defaultDialog(
+      title: "Submit quiz ?",
+      middleText: "",
+      textCancel: "Cancel",
+      cancelTextColor: Colors.red,
+      textConfirm: "Confirm",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        controller.submit();
+        Get.back();
+      },
+    );
   }
 }

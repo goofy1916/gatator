@@ -91,9 +91,9 @@ class HomeController extends GetxController {
     allQuestions = allQuestions..shuffle();
     if (noOfQuestions.value > allQuestions.length) {
       notEnoughQuestions = true;
-      questions.addAll(allQuestions);
+      questions.value = allQuestions;
     } else {
-      questions.addAll(allQuestions.sublist(0, noOfQuestions.value));
+      questions.value = allQuestions.sublist(0, noOfQuestions.value);
     }
     if (allQuestions.isNotEmpty) {
       Get.toNamed(Routes.Quiz);

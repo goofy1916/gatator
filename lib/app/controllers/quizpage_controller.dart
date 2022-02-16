@@ -59,28 +59,30 @@ class QuizPageController extends GetxController {
   }
 
   submit() {
-    correctAnswers = 0;
-    for (final question in questions) {
-      if (question.selectedAnswer.isNotEmpty) {
-        if (question.type == QuestionType.MCQ) {
-          if (const ListEquality().equals(question.selectedAnswer..sort(),
-              question.correctAnswer!..sort())) {
-            question.isRight = true;
-            correctAnswers++;
-          }
-        } else if (question.type == QuestionType.NAT) {
-          if (double.parse(question.from!) <=
-                  double.parse(question.selectedAnswer.first) &&
-              double.parse(question.selectedAnswer.first) <=
-                  double.parse(question.to!)) {
-            question.isRight = true;
-            correctAnswers++;
+    {
+      correctAnswers = 0;
+      for (final question in questions) {
+        if (question.selectedAnswer.isNotEmpty) {
+          if (question.type == QuestionType.MCQ) {
+            if (const ListEquality().equals(question.selectedAnswer..sort(),
+                question.correctAnswer!..sort())) {
+              question.isRight = true;
+              correctAnswers++;
+            }
+          } else if (question.type == QuestionType.NAT) {
+            if (double.parse(question.from!) <=
+                    double.parse(question.selectedAnswer.first) &&
+                double.parse(question.selectedAnswer.first) <=
+                    double.parse(question.to!)) {
+              question.isRight = true;
+              correctAnswers++;
+            }
           }
         }
       }
+      questions.refresh();
+      submitted.value = true;
     }
-    questions.refresh();
-    submitted.value = true;
   }
 
   updateCurrentQuestion(int value) {

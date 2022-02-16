@@ -21,6 +21,7 @@ class QuestionWidget extends StatelessWidget {
       height: controller.submitted.value
           ? MediaQuery.of(context).size.height + 300
           : MediaQuery.of(context).size.height - 100,
+      width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -37,24 +38,27 @@ class QuestionWidget extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: Colors.white)),
                     if (controller.submitted.value)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (controller.questions[i].isRight) ...const [
-                            Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            ),
-                            Text("Correct")
-                          ] else ...const [
-                            Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            ),
-                            Text("Wrong")
+                      SizedBox(
+                        width: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (controller.questions[i].isRight) ...const [
+                              Icon(
+                                Icons.check,
+                                color: Colors.green,
+                              ),
+                              Text("Correct")
+                            ] else ...const [
+                              Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              ),
+                              Text("Wrong")
+                            ],
                           ],
-                        ],
+                        ),
                       )
                   ],
                 );
@@ -93,13 +97,15 @@ class QuestionWidget extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
                     )),
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 20,
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                       controller.questions[i].type == QuestionType.MCQ
                           ? controller.questions[i].correctAnswer.toString()
-                          : "${controller.questions[i].from} - ${controller.questions[i].to}",
+                          : "[${controller.questions[i].from} - ${controller.questions[i].to}]",
                       style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,

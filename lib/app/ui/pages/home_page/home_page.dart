@@ -13,7 +13,6 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const Drawer(),
         appBar: AppBar(
           title: const Text('Gatator'),
           actions: [
