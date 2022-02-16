@@ -26,9 +26,7 @@ class AddQuestionController extends GetxController {
   RxList<String> subTopicList = <String>[].obs;
 
   Rxn<Subject> subject = Rxn<Subject>();
-  SubTopic? subTopic;
-
-  final MyHomeController _myHomeController = Get.find<MyHomeController>();
+  Rxn<SubTopic> subTopic = Rxn<SubTopic>();
 
   get getSolutionImage => solutionImage;
 
@@ -38,7 +36,6 @@ class AddQuestionController extends GetxController {
   void onInit() {
     try {
       isLoading(true);
-      subject(_myHomeController.allSubjects.first);
     } catch (e) {
       log("Subject not initialized");
     } finally {
@@ -111,16 +108,11 @@ class AddQuestionController extends GetxController {
     if (value != null) {
       subject.value = value;
     }
-    if (subject.value!.subTopics != null ||
-        subject.value!.subTopics!.isNotEmpty) {
-      updateSubTopic(subject.value!.subTopics!.first);
-    } else {
-      updateSubTopic(null);
-    }
+    updateSubTopic(null);
   }
 
   void updateSubTopic(SubTopic? value) {
-    subTopic = value;
+    subTopic.value = value;
     update();
   }
 
@@ -133,14 +125,14 @@ class AddQuestionController extends GetxController {
           questionImage,
           "question" +
               subject.value!.title.removeAllWhitespace +
-              subTopic!.title.removeAllWhitespace +
+              subTopic.value!.title.removeAllWhitespace +
               rand.toString(),
           true);
       String answerUrl = await FirebaseService().uploadImageToFirebase(
           solutionImage,
           "solution" +
               subject.value!.title.removeAllWhitespace +
-              subTopic!.title.removeAllWhitespace +
+              subTopic.value!.title.removeAllWhitespace +
               rand.toString(),
           false);
       Question question = Question(
@@ -148,7 +140,7 @@ class AddQuestionController extends GetxController {
           question: questionUrl,
           answer: answerUrl,
           topic: subject.value!.title,
-          subTopic: subTopic!.title,
+          subTopic: subTopic.value!.title,
           selectedAnswer: [],
           from: typeOfQuestion.value == QuestionType.NAT
               ? natFromController.text
@@ -171,6 +163,7 @@ class AddQuestionController extends GetxController {
   }
 
   void clearForm() {
+    log(subject.value!.title.toString() + subTopic.value!.title.toString());
     natFromController.clear();
     natToController.clear();
     correctAnswers.clear();
@@ -179,8 +172,8 @@ class AddQuestionController extends GetxController {
     solutionImage = null;
     _solSelected.value = false;
     options.value = 4;
-    subject.value = _myHomeController.allSubjects[0];
-    subTopic = subject.value?.subTopics?[0];
+    subject.value = null;
+    subTopic.value = null;
   }
 
   removeSolution() {

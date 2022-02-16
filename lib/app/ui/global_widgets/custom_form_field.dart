@@ -16,7 +16,7 @@ class CustomFormField extends StatelessWidget {
         style: const TextStyle(color: Colors.white70),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+          FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.{0,1}\d+$')),
           // DecimalTextInputFormatter(decimalRange: 2)
         ],
         cursorColor: Colors.white70,

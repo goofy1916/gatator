@@ -4,6 +4,7 @@ import 'package:gatator/app/routes/pages.dart';
 import 'package:gatator/app/ui/global_widgets/wide_button.dart';
 import 'package:gatator/app/ui/theme/color_constants.dart';
 import 'package:get/get.dart';
+import 'package:im_stepper/stepper.dart';
 
 import 'components/question_widget.dart';
 
@@ -38,79 +39,89 @@ class QuizPage extends GetView<QuizPageController> {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Obx(() {
-            if (controller.isLoading.value) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_sharp,
-                        color: kAccentColor,
-                      ),
-                      onPressed: () => controller.updateStep(-1),
-                    ),
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Column(
+              children: [
+                // SizedBox(
+                //   height: 40,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       IconButton(
+                //         icon: const Icon(
+                //           Icons.arrow_back_ios_new_sharp,
+                //           color: kAccentColor,
+                //         ),
+                //         onPressed: () => controller.updateStep(-1),
+                //       ),
+                //       IconButton(
+                //         icon: const Icon(
+                //           Icons.arrow_forward_ios_sharp,
+                //           color: kAccentColor,
+                //         ),
+                //         onPressed: () => controller.updateStep(1),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                NumberStepper(
+                  // controlsBuilder: (BuildContext context,
+                  //     {VoidCallback? onStepContinue,
+                  //     VoidCallback? onStepCancel}) {
+                  //   return const SizedBox.shrink();
+                  // },
+                  // onStepTapped: (value) =>
+                  //     controller.updateCurrentQuestion(value),
+                  // steps: getQuestions(),
+                  // currentStep: controller.currentQuestion.value,
+                  // type: StepperType.horizontal,
+                  activeStep: controller.currentQuestion.value,
+                  onStepReached: (value) =>
+                      controller.updateCurrentQuestion(value),
+                  activeStepColor: Colors.blue,
+                  numberStyle: const TextStyle(color: Colors.white),
+                  stepRadius: 10,
+                  stepColor: Colors.grey,
+                  nextButtonIcon: const Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    color: kAccentColor,
                   ),
-                  Expanded(
-                    flex: 10,
-                    child: Stepper(
-                      controlsBuilder: (BuildContext context,
-                          {VoidCallback? onStepContinue,
-                          VoidCallback? onStepCancel}) {
-                        return const SizedBox.shrink();
-                      },
-                      onStepTapped: (value) =>
-                          value < controller.questions.length
-                              ? controller.updateCurrentQuestion(value)
-                              : null,
-                      steps: getQuestions(),
-                      currentStep: controller.currentQuestion.value,
-                      type: StepperType.horizontal,
-                    ),
+                  previousButtonIcon: const Icon(
+                    Icons.arrow_back_ios_sharp,
+                    color: kAccentColor,
                   ),
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: kAccentColor,
-                      ),
-                      onPressed: () => controller.updateStep(1),
-                    ),
-                  ),
-                ],
-              );
-              // return PageView(
-              //   allowImplicitScrolling: false,
-              //   pageSnapping: true,
-              //   physics: const ClampingScrollPhysics(),
-              //   controller: controller.questionController,
-              //   children: getQuestions(),
-              // );
-            }
-          }),
-        ),
+                  numbers: List.generate(
+                      controller.questions.length, (index) => index + 1),
+                ),
+                Expanded(child: getQuestion()),
+              ],
+            );
+            // return PageView(
+            //   allowImplicitScrolling: false,
+            //   pageSnapping: true,
+            //   physics: const ClampingScrollPhysics(),
+            //   controller: controller.questionController,
+            //   children: getQuestions(),
+            // );
+          }
+        }),
       ),
     );
   }
 
-  List<Step> getQuestions() {
-    List<Step> widgets = [];
-    for (int i = 0; i < controller.questions.length; i++) {
-      widgets.add(
-        Step(title: const Text(""), content: QuestionWidget(i: i)),
-      );
-    }
+  Widget getQuestion() {
+    // List<Step> widgets = [];
+    // for (int i = 0; i < controller.questions.length; i++) {
+    //   widgets.add(
+    //     Step(title: const Text(""), content: QuestionWidget(i: i)),
+    //   );
+    // }
 
-    return widgets;
+    return QuestionWidget(i: controller.currentQuestion.value);
   }
 }

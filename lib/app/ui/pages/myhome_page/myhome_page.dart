@@ -45,8 +45,56 @@ class MyHomePage extends GetView<MyHomeController> {
                     } else {
                       return ListView(
                         children: [
-                          Text('Choose your subjects',
-                              style: Theme.of(context).textTheme.headline4!),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'No of Questions for quiz :',
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: kPrimaryColor),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () =>
+                                            controller.updateNoOfQuestions(-1),
+                                        child: const Text("-")),
+                                    SizedBox(
+                                      width: 30,
+                                      child: Center(
+                                        child: Text(
+                                          controller.noOfQuestions.value
+                                              .toString(),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                    TextButton(
+                                        onPressed: () =>
+                                            controller.updateNoOfQuestions(1),
+                                        child: const Text("+")),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Choose your subjects',
+                            style: Theme.of(context).textTheme.headline4!,
+                            textAlign: TextAlign.center,
+                          ),
                           const SizedBox(
                             height: 16,
                           ),
@@ -60,10 +108,10 @@ class MyHomePage extends GetView<MyHomeController> {
               Flexible(
                 flex: 1,
                 child: WideButton(
-                    onPressed: () => controller.toQuizCustomizationScreen(),
+                    onPressed: () => controller.takeQuiz(),
                     child: Center(
                       child: Text(
-                        "Next",
+                        "Take Quiz",
                         style: Theme.of(context)
                             .textTheme
                             .headline4!

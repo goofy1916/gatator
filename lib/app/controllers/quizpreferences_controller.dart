@@ -19,7 +19,7 @@ class QuizPreferencesController extends GetxController {
   bool notEnoughQuestions = false;
 
   updateNoOfQuestions(int i) {
-    if (i < 0 && noOfQuestions.value < 0) {
+    if (i < 0 && noOfQuestions.value < 2) {
       return;
     }
     noOfQuestions.value += i;
@@ -58,6 +58,8 @@ class QuizPreferencesController extends GetxController {
     } else {
       questions.addAll(allQuestions.sublist(0, noOfQuestions.value));
     }
-    Get.toNamed(Routes.Quiz);
+    if (allQuestions.isNotEmpty) {
+      Get.toNamed(Routes.Quiz);
+    }
   }
 }

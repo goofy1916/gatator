@@ -17,92 +17,119 @@ class QuestionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.blueGrey[300],
-      ),
+          borderRadius: BorderRadius.circular(16), color: kPrimaryColor),
       height: controller.submitted.value
           ? MediaQuery.of(context).size.height + 300
           : MediaQuery.of(context).size.height - 100,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Obx(() {
-              return Row(
-                children: [
-                  Text("Question ${i + 1}/${controller.questions.length}",
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(() {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Question ${i + 1}/${controller.questions.length}",
+                        style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white)),
+                    if (controller.submitted.value)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (controller.questions[i].isRight) ...const [
+                            Icon(
+                              Icons.check,
+                              color: Colors.green,
+                            ),
+                            Text("Correct")
+                          ] else ...const [
+                            Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            ),
+                            Text("Wrong")
+                          ],
+                        ],
+                      )
+                  ],
+                );
+              }),
+              SizedBox(
+                height: 400,
+                child: Image.network(
+                  controller.questions[i].question,
+                  loadingBuilder: (context, child, progress) {
+                    if (progress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ),
+              Text(controller.submitted.value ? "Your Answer: " : "Answer: ",
+                  style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white)),
+              if (controller.submitted.value) ...[
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  child: Text(controller.questions[i].selectedAnswer.toString(),
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: controller.questions[i].isRight
+                              ? Colors.green
+                              : Colors.red)),
+                ),
+                const Text("Right Answer: ",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                    )),
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  child: Text(
+                      controller.questions[i].type == QuestionType.MCQ
+                          ? controller.questions[i].correctAnswer.toString()
+                          : "${controller.questions[i].from} - ${controller.questions[i].to}",
                       style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white)),
-                  if (controller.submitted.value)
-                    Row(
-                      children: [
-                        if (controller.questions[i].isRight) ...const [
-                          Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ),
-                          Text("Correct")
-                        ] else ...const [
-                          Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ),
-                          Text("Wrong")
-                        ],
-                      ],
-                    )
-                ],
-              );
-            }),
-            SizedBox(
-              height: 400,
-              child: Image.network(
-                controller.questions[i].question,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
-            const Text("Answer: ",
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white)),
-            controller.questions[i].type == QuestionType.MCQ
-                ? SizedBox(
-                    height: 50,
-                    child: OptionsWidget(
-                      group: i,
-                    ))
-                : Container(
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    height: 50,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text("Your Answer: ",
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white)),
-                          SizedBox(
-                              width: 80,
+                          color: Colors.green)),
+                ),
+              ] else
+                controller.questions[i].type == QuestionType.MCQ
+                    ? SizedBox(
+                        height: 50,
+                        child: OptionsWidget(
+                          group: i,
+                        ))
+                    : Container(
+                        decoration: BoxDecoration(
+                          color: kPrimaryColor,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
                               child: TextField(
                                   style: const TextStyle(
                                     color: Colors.white,
                                   ),
                                   decoration: const InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 8),
+                                    hintStyle: TextStyle(color: Colors.white),
+                                    hintText: "Enter answer",
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.white),
@@ -114,33 +141,32 @@ class QuestionWidget extends StatelessWidget {
                                   ),
                                   onChanged: (String? value) =>
                                       controller.natAnswer(value!, i))),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-            const SizedBox(
-              height: 20,
-            ),
-            if (controller.submitted.value) ...[
-              const Text("Solution: ",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white)),
-              SizedBox(
-                height: 400,
-                child: Image.network(
-                  controller.questions[i].answer,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                ),
+              const SizedBox(
+                height: 20,
               ),
-            ]
-          ],
+              if (controller.submitted.value) ...[
+                const Text("Solution: ",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white)),
+                SizedBox(
+                  height: 400,
+                  child: Image.network(
+                    controller.questions[i].answer,
+                    loadingBuilder: (context, child, progress) {
+                      if (progress == null) return child;
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                ),
+              ]
+            ],
+          ),
         ),
       ),
     );
@@ -175,6 +201,7 @@ class OptionsWidget extends StatelessWidget {
                     child: Obx(() => Row(
                           children: [
                             Checkbox(
+                              checkColor: Colors.white,
                               value: controller.questions[group].selectedAnswer
                                   .contains(option),
                               onChanged: (value) {

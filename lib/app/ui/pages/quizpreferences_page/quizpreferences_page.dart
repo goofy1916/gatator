@@ -24,13 +24,16 @@ class QuizPreferencesPage extends GetView<QuizPreferencesController> {
                   flex: 9,
                   child: Column(
                     children: [
-                      Row(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'No of Questions for quiz :',
                             style: Theme.of(context).textTheme.headline4,
+                          ),
+                          const SizedBox(
+                            height: 8,
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -65,44 +68,44 @@ class QuizPreferencesPage extends GetView<QuizPreferencesController> {
                       const SizedBox(
                         height: 16,
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Time Wanted (in minutes):',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: kPrimaryColor),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextButton(
-                                    onPressed: () =>
-                                        controller.updateTimeWanted(-0.5),
-                                    child: const Text("-")),
-                                SizedBox(
-                                  width: 30,
-                                  child: Center(
-                                    child: Text(
-                                      controller.timeInMinutes.value.toString(),
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                    onPressed: () =>
-                                        controller.updateTimeWanted(0.5),
-                                    child: const Text("+")),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       'Time Wanted (in minutes):',
+                      //       style: Theme.of(context).textTheme.headline4,
+                      //     ),
+                      //     Container(
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(8),
+                      //           color: kPrimaryColor),
+                      //       child: Row(
+                      //         mainAxisSize: MainAxisSize.min,
+                      //         children: [
+                      //           TextButton(
+                      //               onPressed: () =>
+                      //                   controller.updateTimeWanted(-0.5),
+                      //               child: const Text("-")),
+                      //           SizedBox(
+                      //             width: 30,
+                      //             child: Center(
+                      //               child: Text(
+                      //                 controller.timeInMinutes.value.toString(),
+                      //                 style:
+                      //                     const TextStyle(color: Colors.white),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //           TextButton(
+                      //               onPressed: () =>
+                      //                   controller.updateTimeWanted(0.5),
+                      //               child: const Text("+")),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
