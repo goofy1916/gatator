@@ -1,7 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gatator/app/controllers/myhome_controller.dart';
+import 'package:gatator/app/controllers/home_controller.dart';
 import 'package:gatator/app/data/models/subject_model.dart';
 import 'package:gatator/app/ui/global_widgets/wide_button.dart';
 import 'package:gatator/app/ui/utils/enum.dart';
@@ -13,7 +13,7 @@ import 'components/nat_widget.dart';
 class AddQuestionPage extends GetView<AddQuestionController> {
   AddQuestionPage({Key? key}) : super(key: key);
 
-  final MyHomeController _myHomeController = Get.find<MyHomeController>();
+  final HomeController _myHomeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {

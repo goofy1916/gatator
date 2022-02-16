@@ -6,7 +6,7 @@ import 'package:gatator/app/data/services/firebase_service.dart';
 import 'package:gatator/app/routes/pages.dart';
 import 'package:get/get.dart';
 
-class MyHomeController extends GetxController {
+class HomeController extends GetxController {
   final RxBool _isLoading = false.obs;
   final RxList<Subject> _allSubjects = RxList<Subject>([]);
   final RxList<bool> _isExpanded = <bool>[].obs;

@@ -6,7 +6,7 @@ import 'package:universal_io/io.dart' as io;
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
-import 'package:gatator/app/controllers/myhome_controller.dart';
+import 'package:gatator/app/controllers/home_controller.dart';
 import 'package:gatator/app/data/models/question_model.dart';
 import 'package:gatator/app/data/models/subject_model.dart';
 import 'package:gatator/app/data/services/firebase_service.dart';

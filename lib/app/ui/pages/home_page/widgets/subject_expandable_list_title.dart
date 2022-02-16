@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gatator/app/controllers/myhome_controller.dart';
+import 'package:gatator/app/controllers/home_controller.dart';
 import 'package:gatator/app/data/models/subject_model.dart';
 import 'package:gatator/app/ui/theme/color_constants.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,7 @@ class SubjectList extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final MyHomeController controller = Get.find<MyHomeController>();
+  final HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class SubTopicsList extends StatelessWidget {
   SubTopicsList({Key? key, required this.subject}) : super(key: key);
 
   final Subject subject;
-  final MyHomeController controller = Get.find<MyHomeController>();
+  final HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class SubjectListTile extends StatelessWidget {
     required this.subject,
   }) : super(key: key);
 
-  final MyHomeController controller;
+  final HomeController controller;
   final Subject subject;
 
   @override

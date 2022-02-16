@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gatator/app/bindings/myhome_binding.dart';
+import 'package:gatator/app/bindings/home_binding.dart';
 import 'package:gatator/firebase_config.dart';
 import 'package:get/get.dart';
 

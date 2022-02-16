@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gatator/app/controllers/myhome_controller.dart';
+import 'package:gatator/app/controllers/home_controller.dart';
 import 'package:gatator/app/ui/global_widgets/wide_button.dart';
 import 'package:gatator/app/ui/theme/color_constants.dart';
 import 'package:get/get.dart';
 
 import 'widgets/subject_expandable_list_title.dart';
 
-class MyHomePage extends GetView<MyHomeController> {
-  const MyHomePage({Key? key}) : super(key: key);
+class HomePage extends GetView<HomeController> {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

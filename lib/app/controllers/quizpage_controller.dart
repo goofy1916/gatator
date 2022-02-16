@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gatator/app/controllers/myhome_controller.dart';
+import 'package:gatator/app/controllers/home_controller.dart';
 import 'package:gatator/app/data/models/question_model.dart';
 import 'package:gatator/app/ui/utils/enum.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class QuizPageController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<Question> questions = <Question>[].obs;
 
-  MyHomeController myHomeController = Get.find();
+  HomeController myHomeController = Get.find();
 
   RxBool submitted = false.obs;
   int correctAnswers = 0;
